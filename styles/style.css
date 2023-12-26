@@ -8,8 +8,13 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    display: grid;
+    position: relative;
+    min-height: 100vh;
     margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 8fr 1fr;
+    /* overflow-y: hidden; */
 }
 
 
@@ -18,21 +23,41 @@ body {
     display: flex; 
     flex-direction: row;
     align-items: center;
+    grid-row-start: 1;
 }
 
-.header-container > h1 { /* header title */
+.header-container .menu {   /* TODO: create animation for menu bar */
+    margin-left: 0;
+    width: 2rem;
+    height: 2rem;
+}
+
+.header-container > h1 {    /* header title */
     font-size: 2rem;
 }
 
-.header-container > svg { /* header logo */
-    width: 3rem;
-    margin-left: 0.8rem; /* put space between title and logo */
-}
-
-.header-container > input { /* button to add more books */
+.header-container > svg {   /* header logo */
+    margin-left: 0.8rem;    /* put space between title and logo */
+    margin-right: 0.8rem;
     width: 3rem;
     height: 3rem;
+}
+
+.header-container > button {
+    background-color: transparent;
+    border: none;
     margin-left: auto;
+    width: 2rem;
+    height: 2rem;
 }
 
 
+/* FOOTER SECTION */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    text-align: center;
+    grid-row-end: 4;
+}
