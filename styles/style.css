@@ -52,6 +52,49 @@ body {
 }
 
 
+/* LIBRARY SECTION */
+.library-container {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    display: grid;
+    grid-auto-rows: 15rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+}
+
+
+/* BOOK SECTION */
+.book {
+    display: inline-flex;
+    flex-direction: column;
+    border: 1px solid;
+    padding: 1.5rem;
+}
+
+.book .title {
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+}
+
+.book .author {
+    text-align: left;
+}
+
+.book .page-count {
+    text-align: left;
+}
+
+.book .read {
+    margin-top: auto; /* place buttons on the bottom of book */
+    text-transform: uppercase;
+}
+
+.book .delete {
+    text-transform: uppercase;
+}
+
+
 /* FOOTER SECTION */
 footer {
     position: absolute;
@@ -59,5 +102,4 @@ footer {
     width: 100%;
     height: 2.5rem;
     text-align: center;
-    grid-row-end: 4;
 }
