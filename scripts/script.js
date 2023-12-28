@@ -4,13 +4,15 @@ const bookContainer = document.querySelector(".add-book-container");
 const addBooksBtn   = document.querySelector(".add-books-btn");
 const submitBtn     = document.querySelector(".submit-btn");
 const cancelBtn     = document.querySelector(".cancel-btn");
+const modalBlur     = document.querySelector(".modal-blur");
 
 
 // --SHOW BOOK CONTAINER MODAL--
 addBooksBtn.addEventListener("pointerdown", () => {
     bookContainer.style.display = "block";
-    setTimeout(() => { // gives a little delay
+    setTimeout(() => {                              // gives a little delay
         bookContainer.classList.add("show");
+        modalBlur.classList.add("active");
     }, 0)
 });
 
@@ -18,17 +20,20 @@ addBooksBtn.addEventListener("pointerdown", () => {
 // --HIDE BOOK CONTAINER MODAL--
 cancelBtn.addEventListener("pointerdown", () => {   // cancel button clicked on
     bookContainer.classList.remove("show");
+    modalBlur.classList.remove("active");
 });
 
 document.addEventListener("pointerdown", (e) => {   // area outside modal window clicked on
     if (!e.composedPath().includes(bookContainer)) {
         bookContainer.classList.remove("show");
+        modalBlur.classList.remove("active");
     }
 });
 
 document.addEventListener("keydown", (e) => {       // escape button pressed down
     if (e.code === "Escape" && bookContainer.classList.contains("show")) {
         bookContainer.classList.remove("show");
+        modalBlur.classList.remove("active");
     }
 })
 
@@ -40,6 +45,7 @@ bookContainer.addEventListener("transitionend", function(e) {
         }
     }
 });
+
 
 // --- LOGIC FOR ADDING AND REMOVING BOOKS ---
 
