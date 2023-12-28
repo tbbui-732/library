@@ -53,4 +53,5 @@ bookContainer.addEventListener("transitionend", function(e) {
 // (TODO: give functionality for adding books when hitting the submit button)
 submitBtn.addEventListener("pointerdown", () => {
     bookContainer.classList.remove("show");
+    modalBlur.classList.remove("active");
 });

@@ -123,36 +123,49 @@
     <!-- Note: This will be initially hidden and only shown by clicking on the hamburger menu -->
     <div class="add-book-container">
         <form action="" class="book-form">
-            <!-- title -->
-            <div class="form-item">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-input" type="text" name="title">
+            <div class="form-content">
+                <div class="left-side">
+                    <label class="form-label" for="title">Title</label>
+                    <label class="form-label" for="author">Author</label>
+                    <label class="form-label" for="page-number">Page count</label>
+                    <label class="form-label" for="read">Already read this book?</label>
+                </div>
+                
+                <div class="right-side">
+                    <input 
+                        class="form-input" 
+                        type="text" 
+                        maxlength=100
+                        placeholder="Harry Potter"
+                        name="title" 
+                        />
+                    <input 
+                        class="form-input" 
+                        type="text" 
+                        maxlength=100
+                        placeholder="J.K. Rowling"
+                        name="author" 
+                        />
+                    <input 
+                        class="form-input" 
+                        type="number" 
+                        placeholder="545"
+                        name="page-number"
+                        />
+                    <input 
+                        class="form-input" 
+                        type="checkbox" 
+                        name="read"
+                        />
+                </div>
             </div>
-
-            <!--  author -->
-            <div class="form-item">
-                <label class="form-label" for="author">Author</label>
-                <input class="form-input" type="text" name="author">
+            <div class="submission">
+                <input class="submit-btn" type="submit" value="Add book">
+                <input class="cancel-btn" type="submit" value="Cancel">
             </div>
-
-            <!-- page numbers -->
-            <div class="form-item">
-                <label class="form-label" for="page-number">Page count</label>
-                <input class="form-input" type="text" name="page-number">
-            </div>
-
-            <!-- read? -->
-            <div class="form-item">
-                <label class="form-label" for="read">Read</label>
-                <input class="form-input" type="text" name="read">
-            </div>
-
-            <!-- submit btn -->
-            <input class="submit-btn" type="submit" value="add book">
-            <input class="cancel-btn" type="submit" value="cancel">
         </form>
     </div>
-
+    <div class="modal-blur"></div>
 
     <!-- Footer section -->
     <footer>
