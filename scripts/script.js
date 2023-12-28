@@ -40,3 +40,11 @@ bookContainer.addEventListener("transitionend", function(e) {
         }
     }
 });
+
+// --- LOGIC FOR ADDING AND REMOVING BOOKS ---
+
+// --ADD NEW BOOK--
+// (TODO: give functionality for adding books when hitting the submit button)
+submitBtn.addEventListener("pointerdown", () => {
+    bookContainer.classList.remove("show");
+});
