@@ -1,30 +1,38 @@
 // --- MODAL MENU ANIMATION ---
-
-// retrieve dom elements
+// Retrieve DOM elements
 const bookContainer = document.querySelector(".add-book-container");
 const addBooksBtn   = document.querySelector(".add-books-btn");
 const submitBtn     = document.querySelector(".submit-btn");
 const cancelBtn     = document.querySelector(".cancel-btn");
 
-// show book container if "add book" button is clicked on
+
+// --SHOW BOOK CONTAINER MODAL--
 addBooksBtn.addEventListener("pointerdown", () => {
     bookContainer.style.display = "block";
-    setTimeout(() => {
+    setTimeout(() => { // gives a little delay
         bookContainer.classList.add("show");
     }, 0)
 });
 
-// hide book container if "cancel" button is clicked on
-cancelBtn.addEventListener("pointerdown", () => {
+
+// --HIDE BOOK CONTAINER MODAL--
+cancelBtn.addEventListener("pointerdown", () => {   // cancel button clicked on
     bookContainer.classList.remove("show");
 });
 
-// add dummy function (TODO: give functionality for adding books when hitting the submit button)
-submitBtn.addEventListener("pointerdown", () => {
-    bookContainer.classList.remove("show");
+document.addEventListener("pointerdown", (e) => {   // area outside modal window clicked on
+    if (!e.composedPath().includes(bookContainer)) {
+        bookContainer.classList.remove("show");
+    }
 });
 
-// update book container when a transition ends
+document.addEventListener("keydown", (e) => {       // escape button pressed down
+    if (e.code === "Escape" && bookContainer.classList.contains("show")) {
+        bookContainer.classList.remove("show");
+    }
+})
+
+// --UPDATE BOOK CONTAINER--
 bookContainer.addEventListener("transitionend", function(e) {
     if (!this.classList.contains("show")) {
         if (e.propertyName == "transform") {
