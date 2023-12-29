@@ -198,3 +198,48 @@ function storeNewBookData(book) {
     bookContainer.classList.remove("show");                         // Hide modal window
     modalBlur.classList.remove("active");
 }
+
+// GENERATE DUMMY DATA FOR PRESENTATION
+function generateDummyData() {
+    const fakeAuthors = [
+        "Jane Doe",
+        "John Smith",
+        "Alice Johnson",
+        "Bob Thompson",
+        "Eva White",
+        "Charlie Brown",
+        "Olivia Davis",
+        "Daniel Miller",
+        "Sophia Wilson",
+        "William Turner",
+        "Emma Harris",
+        "Liam Martin"
+    ];
+
+    const fakeTitles = [
+        "The Secret Garden",
+        "Beyond the Horizon",
+        "Echoes of Eternity",
+        "Midnight Serenade",
+        "Whispers in the Wind",
+        "Enchanted Dreams",
+        "Ripples of Time",
+        "Lost in the Stars",
+        "Eternal Embrace",
+        "Shadows of Destiny",
+        "Silent Echo",
+        "Dancing with Dragons"
+    ];
+    
+    for (let idx = 0; idx < 12; idx++) {
+        const fakeBook = new Book(
+            fakeTitles[idx],
+            fakeAuthors[idx],
+            Math.floor(Math.random() * 1000),
+            undefined
+        )
+
+        library.addBook(fakeBook);
+    }
+    library.display();
+}
