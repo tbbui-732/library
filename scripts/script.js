@@ -61,11 +61,16 @@ class Library {
     addBook(book) {
         if (!Book.isBook(book)) {
             throw new Error('New book must be a Book object');
-        } else if (this.library.includes(book)) {
-            throw new Error("Book already exists in library");
-        } else {
-            this.library.push(book);
-        }
+        } 
+
+        this.library.forEach((libBook) => {
+            if (book.id == libBook.id) {
+                alert("Book already exists in library! Create a new title!");
+                throw new Error("Book already exists in library");
+            }
+        });
+
+        this.library.push(book);
     }
 
     removeBook(book) {
@@ -136,13 +141,24 @@ class Library {
     }
 }
 
+function createBookID(title, author, page_count) {                      // Hashing function based off of djb2 [http://www.cse.yorku.ca/~oz/hash.html]
+    const combinedStr = `${title}${author}${page_count}`;
+    let hash = 5381;
+    for (let i = 0; i < combinedStr.length; i++) {
+        const charCode = combinedStr.charCodeAt(i);
+        hash = ((hash << 5) + hash) + charCode;
+    }
+
+    return hash >>> 0;
+}
 
 class Book {
     constructor(title, author, page_count, read) {
-        this.title = title;
-        this.author = author;
-        this.page_count = page_count;
+        this.title = title ? title : "";
+        this.author = author ? author : "";
+        this.page_count = page_count ? page_count : 0;
         this.read = read ? "yes" : "no";
+        this.id = createBookID(this.title, this.author, this.page_count);
     }
     printContent() {
         console.log(`Title: ${this.title}
