@@ -122,46 +122,57 @@
     <!-- Add book section -->
     <!-- Note: This will be initially hidden and only shown by clicking on the hamburger menu -->
     <div class="add-book-container">
-        <form action="" class="book-form">
+        <form action="" class="book-form" name="book-form" method="GET">
             <div class="form-content">
                 <div class="left-side">
-                    <label class="form-label" for="title">Title</label>
-                    <label class="form-label" for="author">Author</label>
-                    <label class="form-label" for="page-number">Page count</label>
-                    <label class="form-label" for="read">Already read this book?</label>
+                    <label class="form-label" for="title" >
+                        Title
+                    </label>
+                    <label class="form-label" for="author">
+                        Author
+                    </label>
+                    <label class="form-label" for="page_count">
+                        Page count
+                    </label>
+                    <label class="form-label" for="read">
+                        Already read this book?
+                    </label>
                 </div>
-                
                 <div class="right-side">
                     <input 
                         class="form-input" 
                         type="text" 
-                        maxlength=100
+                        maxlength="100"
                         placeholder="Harry Potter"
                         name="title" 
+                        id="title" 
                         />
                     <input 
                         class="form-input" 
                         type="text" 
-                        maxlength=100
+                        maxlength="100"
                         placeholder="J.K. Rowling"
                         name="author" 
+                        id="author" 
                         />
                     <input 
                         class="form-input" 
                         type="number" 
                         placeholder="545"
-                        name="page-number"
+                        name="page_count"
+                        id="page_count"
                         />
                     <input 
                         class="form-input" 
                         type="checkbox" 
                         name="read"
+                        id="read"
                         />
                 </div>
             </div>
             <div class="submission">
-                <input class="submit-btn" type="submit" value="Add book">
-                <input class="cancel-btn" type="submit" value="Cancel">
+                <input class="submit-btn" type="button" value="Add book" onClick="storeNewBookData(this.form)" />
+                <input class="cancel-btn" type="button" value="Cancel" />
             </div>
         </form>
     </div>

@@ -48,10 +48,76 @@ bookContainer.addEventListener("transitionend", function(e) {
 
 
 // --- LOGIC FOR ADDING AND REMOVING BOOKS ---
+// --DEFINING LIBRARY CLASSES--
+class Library {
+    constructor(library = []) {                     // Array of Book objects
+        if (!Array.isArray(library)) {
+            throw new Error('Library must be an array');
+        }
+        this.library = library;
+    }
 
-// --ADD NEW BOOK--
-// (TODO: give functionality for adding books when hitting the submit button)
-submitBtn.addEventListener("pointerdown", () => {
-    bookContainer.classList.remove("show");
+    addBook(book) {
+        if (!Book.isBook(book)) {
+            throw new Error('New book must be a Book object');
+        }
+        this.library.push(book);
+    }
+
+    removeBook(book) {
+        const book_idx = library.indexOf(book);
+        if (book_idx > -1) {
+            library.splice(book_idx, 1);
+        } else {
+            throw new Error("{book} not found");
+        }
+    }
+    printContent() {
+        console.log("books currently in the library");
+        this.library.forEach((book) => {
+            console.log(book.title);
+        })
+    }
+}
+
+
+class Book {
+    constructor(title, author, page_count, read) {
+        this.title = title;
+        this.author = author;
+        this.page_count = page_count;
+        this.read = read ? "yes" : "no";
+    }
+    printContent() {
+        console.log(`Title: ${this.title}
+Author: ${this.author}
+Page count: ${this.page_count}
+Read: ${this.read}`)
+    }
+    static isBook(book) {
+        return book instanceof Book;
+    }
+}
+
+
+// INSTANTIATING NEW LIBRARY OBJECT
+const library = new Library();
+
+
+function storeNewBookData(book) {
+    const bookFormData = new FormData(book);                        // Convert form to FormData
+    const bookFormDataObject = Object.fromEntries(bookFormData);
+    const newBook = new Book(                                       // Create new Book object
+        bookFormDataObject.title,
+        bookFormDataObject.author,
+        bookFormDataObject.page_count,
+        bookFormDataObject.read
+    );
+    newBook.printContent();                                         // Log book information
+
+    library.addBook(newBook);                                       // Add book to library
+    // library.printContent();
+
+    bookContainer.classList.remove("show");                         // Hide modal window
     modalBlur.classList.remove("active");
-});
+}
