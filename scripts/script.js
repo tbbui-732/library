@@ -5,6 +5,7 @@ const addBooksBtn   = document.querySelector(".add-books-btn");
 const submitBtn     = document.querySelector(".submit-btn");
 const cancelBtn     = document.querySelector(".cancel-btn");
 const modalBlur     = document.querySelector(".modal-blur");
+// const deleteBookBtn = document.querySelector(".delete");
 
 
 // --SHOW BOOK CONTAINER MODAL--
@@ -65,9 +66,9 @@ class Library {
     }
 
     removeBook(book) {
-        const book_idx = library.indexOf(book);
+        const book_idx = this.library.indexOf(book);
         if (book_idx > -1) {
-            library.splice(book_idx, 1);
+            this.library.splice(book_idx, 1);
         } else {
             throw new Error("{book} not found");
         }
@@ -90,22 +91,32 @@ class Library {
             const authorPg      = document.createElement("p");
             const pageCountPg   = document.createElement("p");
             const readButton    = document.createElement("button");
+            const deleteButton  = document.createElement("button");
 
             bookDiv.classList.add("book");                              // Set each element's classname
             titleHeader.classList.add("title");
             authorPg.classList.add("author");
             pageCountPg.classList.add("page-count");
             readButton.classList.add("read");
+            deleteButton.classList.add("delete");
 
             titleHeader.innerHTML   = `${book.title}`;                  // Set element content
             authorPg.innerHTML      = `Author: ${book.author}`;
             pageCountPg.innerHTML   = `Page count: ${book.page_count}`;
             readButton.innerHTML    = `Read: ${book.read}`;
+            deleteButton.innerHTML  = "Delete";
+
+            deleteButton.addEventListener("click", () => {              // Delete book event listener
+                console.log(`Deleting ${book.title}`);
+                library.removeBook(book);
+                library.display();
+            });
 
             bookDiv.appendChild(titleHeader);                           // Append children elements to book div
             bookDiv.appendChild(authorPg);
             bookDiv.appendChild(pageCountPg);
             bookDiv.appendChild(readButton);
+            bookDiv.appendChild(deleteButton);
 
             libraryContainer.appendChild(bookDiv);                      // Append books to library
         });
@@ -135,7 +146,6 @@ Read: ${this.read}`)
 // INSTANTIATING NEW LIBRARY OBJECT
 const library = new Library();
 
-
 function storeNewBookData(book) {
     const bookFormData = new FormData(book);                        // Convert form to FormData
     const bookFormDataObject = Object.fromEntries(bookFormData);
@@ -145,7 +155,7 @@ function storeNewBookData(book) {
         bookFormDataObject.page_count,
         bookFormDataObject.read
     );
-    newBook.printContent();                                         // Log book information
+    // newBook.printContent();                                         // Log book information
 
     library.addBook(newBook);                                       // Add book to library
     library.display();
