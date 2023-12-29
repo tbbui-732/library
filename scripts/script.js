@@ -92,6 +92,11 @@ class Library {
     display() {
         const libraryContainer = document.querySelector(".library-container");
         libraryContainer.innerHTML = "";                                // Clear existing content
+        
+        if (this.library.length === 0) {                                // Check if library contains any book
+            libraryContainer.innerHTML = "Add a new book to begin keeping track of your library!";
+            return;
+        }
 
         this.library.forEach((book) => {
             const bookDiv       = document.createElement("div");        // Create HTML book elements
