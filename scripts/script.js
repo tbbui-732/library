@@ -10,7 +10,7 @@ const modalBlur     = document.querySelector(".modal-blur");
 // --SHOW BOOK CONTAINER MODAL--
 addBooksBtn.addEventListener("pointerdown", () => {
     bookContainer.style.display = "block";
-    setTimeout(() => {                              // gives a little delay
+    setTimeout(() => {                                      // Gives a little delay
         bookContainer.classList.add("show");
         modalBlur.classList.add("active");
     }, 0)
@@ -18,19 +18,19 @@ addBooksBtn.addEventListener("pointerdown", () => {
 
 
 // --HIDE BOOK CONTAINER MODAL--
-cancelBtn.addEventListener("pointerdown", () => {   // cancel button clicked on
+cancelBtn.addEventListener("pointerdown", () => {           // Cancel button clicked on
     bookContainer.classList.remove("show");
     modalBlur.classList.remove("active");
 });
 
-document.addEventListener("pointerdown", (e) => {   // area outside modal window clicked on
+document.addEventListener("pointerdown", (e) => {           // Area outside modal window clicked on
     if (!e.composedPath().includes(bookContainer)) {
         bookContainer.classList.remove("show");
         modalBlur.classList.remove("active");
     }
 });
 
-document.addEventListener("keydown", (e) => {       // escape button pressed down
+document.addEventListener("keydown", (e) => {               // Escape button pressed down
     if (e.code === "Escape" && bookContainer.classList.contains("show")) {
         bookContainer.classList.remove("show");
         modalBlur.classList.remove("active");
@@ -72,11 +72,43 @@ class Library {
             throw new Error("{book} not found");
         }
     }
+
     printContent() {
         console.log("books currently in the library");
         this.library.forEach((book) => {
             console.log(book.title);
         })
+    }
+
+    display() {
+        const libraryContainer = document.querySelector(".library-container");
+        libraryContainer.innerHTML = "";                                // Clear existing content
+
+        this.library.forEach((book) => {
+            const bookDiv       = document.createElement("div");        // Create HTML book elements
+            const titleHeader   = document.createElement("h2"); 
+            const authorPg      = document.createElement("p");
+            const pageCountPg   = document.createElement("p");
+            const readButton    = document.createElement("button");
+
+            bookDiv.classList.add("book");                              // Set each element's classname
+            titleHeader.classList.add("title");
+            authorPg.classList.add("author");
+            pageCountPg.classList.add("page-count");
+            readButton.classList.add("read");
+
+            titleHeader.innerHTML   = `${book.title}`;                  // Set element content
+            authorPg.innerHTML      = `Author: ${book.author}`;
+            pageCountPg.innerHTML   = `Page count: ${book.page_count}`;
+            readButton.innerHTML    = `Read: ${book.read}`;
+
+            bookDiv.appendChild(titleHeader);                           // Append children elements to book div
+            bookDiv.appendChild(authorPg);
+            bookDiv.appendChild(pageCountPg);
+            bookDiv.appendChild(readButton);
+
+            libraryContainer.appendChild(bookDiv);                      // Append books to library
+        });
     }
 }
 
@@ -116,6 +148,7 @@ function storeNewBookData(book) {
     newBook.printContent();                                         // Log book information
 
     library.addBook(newBook);                                       // Add book to library
+    library.display();
     // library.printContent();
 
     bookContainer.classList.remove("show");                         // Hide modal window
