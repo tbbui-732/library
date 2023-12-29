@@ -61,8 +61,11 @@ class Library {
     addBook(book) {
         if (!Book.isBook(book)) {
             throw new Error('New book must be a Book object');
+        } else if (this.library.includes(book)) {
+            throw new Error("Book already exists in library");
+        } else {
+            this.library.push(book);
         }
-        this.library.push(book);
     }
 
     removeBook(book) {
@@ -105,6 +108,16 @@ class Library {
             pageCountPg.innerHTML   = `Page count: ${book.page_count}`;
             readButton.innerHTML    = `Read: ${book.read}`;
             deleteButton.innerHTML  = "Delete";
+    
+            readButton.addEventListener("click", () => {
+                console.log("Updating read status");
+                if (book.read === "no") {
+                    book.read = "yes";
+                } else {
+                    book.read = "no";
+                }
+                library.display();
+            });
 
             deleteButton.addEventListener("click", () => {              // Delete book event listener
                 console.log(`Deleting ${book.title}`);
@@ -155,7 +168,7 @@ function storeNewBookData(book) {
         bookFormDataObject.page_count,
         bookFormDataObject.read
     );
-    // newBook.printContent();                                         // Log book information
+    newBook.printContent();                                         // Log book information
 
     library.addBook(newBook);                                       // Add book to library
     library.display();
